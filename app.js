@@ -40,12 +40,21 @@ const selectItem = (event, img) => {
     element.classList.toggle('added');
 
     let item = sliders.indexOf(img);
+
     if (item === -1) {
         sliders.push(img);
+        viewimg(sliders);
     } else if (item !== -1) {
-        sliders.pop(img);
+        sliders.splice(item,1);
+        viewimg(sliders);
     }
+};
+
+const viewimg = (sliders)=>{
+    const sli = sliders.length;
+    console.log(sli);
     const divextend = document.getElementById('divextend');
+    divextend.innerHTML= '';
     let newdiv;
     sliders.forEach(img =>{
         newdiv = document.createElement('div');
@@ -53,9 +62,11 @@ const selectItem = (event, img) => {
         newdiv.innerHTML =`
         <img src="${img}" alt="">
         `;
+        divextend.appendChild(newdiv);
     });
-    divextend.appendChild(newdiv);
-};
+
+}
+
 var timer;
 const createSlider = () => {
     // check slider image length
